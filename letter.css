@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Mencegah scroll */
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: rgb(89, 5, 167);
+    font-family: Arial, sans-serif;
+}
+
+.glitch-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap; /* Membagi elemen secara fleksibel */
+    justify-content: center;
+    align-content: center;
+}
+
+.glitch-text {
+    font-size: 2rem;
+    font-weight: bold;
+    position: relative;
+    color: rgb(122, 58, 206);
+    text-transform: uppercase;
+    margin: 5px;
+    text-shadow: 2px 2px 0 rgb(182, 38, 38), -2px -2px 0 rgb(253, 253, 253);
+    animation: glitch-animation 1s infinite;
+}
+
+/* Tambahkan animasi glitch pada teks */
+@keyframes glitch-animation {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+    100% { transform: translate(0, 0); }
+}
+
+
+/* Kontainer tombol EXIT tetap di tengah layar */
+.exit-button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* Pastikan tombol berada di atas layer glitch spam */
+}
+
+/* Tombol utama */
+.exit-button {
+    font-family: "Silkscreen", sans-serif;
+    position: relative;
+    padding: 10px 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: rgb(38, 7, 43);
+    background: rgb(82, 7, 153);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 5px 15px rgba(115, 37, 189, 0.473);
+    overflow: hidden; /* Supaya pseudo-elemen tidak keluar dari tombol */
+    text-transform: uppercase;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.exit-button:hover {
+    background: rgb(61, 17, 119);
+    transform: scale(1.1);
+}
+
+/* Pseudo-elemen glitch */
+.exit-button::before,
+.exit-button::after {
+    content: "KANA?"; /* Sama dengan teks tombol */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+    color: rgb(106, 4, 165);
+    text-shadow: 2px 0 red, -2px 0 blue; /* Warna glitch */
+    clip: rect(0, 0, 0, 0); /* Memotong teks (akan dianimasikan) */
+    z-index: -1;
+}
+
+/* Glitch tipis pada layer sebelum */
+.exit-button::before {
+    animation: glitch-before 1.5s infinite linear;
+}
+
+/* Glitch tipis pada layer setelah */
+.exit-button::after {
+    animation: glitch-after 1.5s infinite linear;
+}
